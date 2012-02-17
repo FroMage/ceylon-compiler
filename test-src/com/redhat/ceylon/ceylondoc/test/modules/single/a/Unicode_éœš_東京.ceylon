@@ -19,4 +19,6 @@
  */
 doc "I contain Unicode_éœš_東京"
 shared class Unicode_éœš_東京 () {
+    Character c = `東`;
+    shared Unicode_éœš_東京 unicode_éœš_東京 = Unicode_éœš_東京();
 }
