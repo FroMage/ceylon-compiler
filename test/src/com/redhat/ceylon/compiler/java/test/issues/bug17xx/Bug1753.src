@@ -1,0 +1,18 @@
+package com.redhat.ceylon.compiler.java.test.issues.bug17xx;
+
+final class bug1753_ {
+    
+    private bug1753_() {
+    }
+    
+    static void bug1753() {
+        final .ceylon.language.String[] stringArray = (.ceylon.language.String[]).ceylon.language.nothing_.get_();
+        final .com.redhat.ceylon.compiler.java.test.issues.bug17xx.Bug1753 java = new .com.redhat.ceylon.compiler.java.test.issues.bug17xx.Bug1753();
+        java.createArray(stringArray);
+    }
+    
+    public static void main(.java.lang.String[] args) {
+        .ceylon.language.process_.get_().setupArguments(args);
+        .com.redhat.ceylon.compiler.java.test.issues.bug17xx.bug1753_.bug1753();
+    }
+}

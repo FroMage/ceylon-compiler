@@ -333,15 +333,7 @@ public abstract class AbstractModelLoader implements ModelCompleter, ModelLoader
             timer.startIgnore(TIMER_MODEL_LOADER_CATEGORY);
             try{
                 // Java array classes are not where we expect them
-                if (JAVA_LANG_OBJECT_ARRAY.equals(name)
-                        || JAVA_LANG_BOOLEAN_ARRAY.equals(name)
-                        || JAVA_LANG_BYTE_ARRAY.equals(name)
-                        || JAVA_LANG_SHORT_ARRAY.equals(name)
-                        || JAVA_LANG_INT_ARRAY.equals(name)
-                        || JAVA_LANG_LONG_ARRAY.equals(name)
-                        || JAVA_LANG_FLOAT_ARRAY.equals(name)
-                        || JAVA_LANG_DOUBLE_ARRAY.equals(name)
-                        || JAVA_LANG_CHAR_ARRAY.equals(name)) {
+                if (isJavaArray(name)) {
                     // turn them into their real class location (get rid of the "java.lang" prefix)
                     name = "com.redhat.ceylon.compiler.java.language" + name.substring(9);
                     module = getLanguageModule();
@@ -364,6 +356,18 @@ public abstract class AbstractModelLoader implements ModelCompleter, ModelLoader
         }
     }
 
+    private boolean isJavaArray(String qualifiedName) {
+        return JAVA_LANG_OBJECT_ARRAY.equals(qualifiedName)
+                || JAVA_LANG_BOOLEAN_ARRAY.equals(qualifiedName)
+                || JAVA_LANG_BYTE_ARRAY.equals(qualifiedName)
+                || JAVA_LANG_SHORT_ARRAY.equals(qualifiedName)
+                || JAVA_LANG_INT_ARRAY.equals(qualifiedName)
+                || JAVA_LANG_LONG_ARRAY.equals(qualifiedName)
+                || JAVA_LANG_FLOAT_ARRAY.equals(qualifiedName)
+                || JAVA_LANG_DOUBLE_ARRAY.equals(qualifiedName)
+                || JAVA_LANG_CHAR_ARRAY.equals(qualifiedName);
+    }
+    
     protected String cacheKeyByModule(Module module, String name) {
         return getCacheKeyByModule(module, name);
     }
@@ -4053,7 +4057,7 @@ public abstract class AbstractModelLoader implements ModelCompleter, ModelLoader
                 return JAVA_CHAR_ARRAY_TYPE;
             } else {
                 // object array
-                return new SimpleReflType(JAVA_LANG_OBJECT_ARRAY, SimpleReflType.Module.JDK, TypeKind.DECLARED, ct);
+                return new SimpleReflType(JAVA_LANG_OBJECT_ARRAY, SimpleReflType.Module.JDK, TypeKind.DECLARED, new SimpleWildcardType(ct));
             }
         }
         return type;
@@ -4173,7 +4177,9 @@ public abstract class AbstractModelLoader implements ModelCompleter, ModelLoader
                     }
 
                     // record use-site variance if required
-                    if(!Decl.isCeylon(declaration) && siteVariance != null){
+                    if((!Decl.isCeylon(declaration)
+                            || isJavaArray(type.getQualifiedName()))
+                            && siteVariance != null){
                         // lazy alloc
                         if(siteVarianceMap == null)
                             siteVarianceMap = new HashMap<TypeParameter,SiteVariance>();

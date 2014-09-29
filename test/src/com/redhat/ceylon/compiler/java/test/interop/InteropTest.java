@@ -463,4 +463,10 @@ public class InteropTest extends CompilerTest {
     public void testIopBug1806(){
         compareWithJavaSource("Bug1806");
     }
+    
+    public static void main(String[] args) {
+        Object[] arr = new String[0];
+        System.err.println(arr instanceof Object[]);
+        System.err.println(arr instanceof String[]);
+    }
 }

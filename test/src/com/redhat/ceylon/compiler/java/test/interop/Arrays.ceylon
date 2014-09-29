@@ -43,7 +43,7 @@ import java.io { File }
 @noanno
 void testFiles() {
     File f = File(".");
-    ObjectArray<File> items = f.listFiles();
+    ObjectArray<out File> items = f.listFiles();
     File? f2 = items.get(0);
 }
 
@@ -104,7 +104,7 @@ void test_booleans() {
 @noanno
 void test_JBooleans() {
     TypesJava java = TypesJava();
-    ObjectArray<JBoolean> items = java.return_Booleans();
+    ObjectArray<out JBoolean> items = java.return_Booleans();
     JBoolean? b = items.get(0);
     if (exists b) {
         items.set(1, b);
@@ -133,7 +133,7 @@ void test_bytes() {
 @noanno
 void test_JBytes() {
     TypesJava java = TypesJava();
-    ObjectArray<JByte> items = java.return_Bytes();
+    ObjectArray<out JByte> items = java.return_Bytes();
     JByte? n = items.get(0);
     if (exists n) {
         items.set(1, n);
@@ -162,7 +162,7 @@ void test_shorts() {
 @noanno
 void test_JShorts() {
     TypesJava java = TypesJava();
-    ObjectArray<JShort> items = java.return_Shorts();
+    ObjectArray<out JShort> items = java.return_Shorts();
     JShort? n = items.get(0);
     if (exists n) {
         items.set(1, n);
@@ -191,7 +191,7 @@ void test_ints() {
 @noanno
 void test_JIntegers() {
     TypesJava java = TypesJava();
-    ObjectArray<JInteger> items = java.return_Integers();
+    ObjectArray<out JInteger> items = java.return_Integers();
     JInteger? n = items.get(0);
     if (exists n) {
         items.set(1, n);
@@ -220,7 +220,7 @@ void test_longs() {
 @noanno
 void test_JLongs() {
     TypesJava java = TypesJava();
-    ObjectArray<JLong> items = java.return_Longs();
+    ObjectArray<out JLong> items = java.return_Longs();
     JLong? n = items.get(0);
     if (exists n) {
         items.set(1, n);
@@ -249,7 +249,7 @@ void test_floats() {
 @noanno
 void test_JFloats() {
     TypesJava java = TypesJava();
-    ObjectArray<JFloat> items = java.return_Floats();
+    ObjectArray<out JFloat> items = java.return_Floats();
     JFloat? f = items.get(0);
     if (exists f) {
         items.set(1, f);
@@ -278,7 +278,7 @@ void test_doubles() {
 @noanno
 void test_JDoubles() {
     TypesJava java = TypesJava();
-    ObjectArray<JDouble> items = java.return_Doubles();
+    ObjectArray<out JDouble> items = java.return_Doubles();
     JDouble? f = items.get(0);
     if (exists f) {
         items.set(1, f);
@@ -308,7 +308,7 @@ void test_chars() {
 @noanno
 void test_JCharacters() {
     TypesJava java = TypesJava();
-    ObjectArray<JCharacter> items = java.return_Characters();
+    ObjectArray<out JCharacter> items = java.return_Characters();
     JCharacter? c = items.get(0);
     if (exists c) {
         items.set(1, c);
@@ -320,7 +320,7 @@ void test_JCharacters() {
 @noanno
 void test_Strings() {
     TypesJava java = TypesJava();
-    ObjectArray<JString> items = java.return_Strings();
+    ObjectArray<out JString> items = java.return_Strings();
     JString? s = items.get(0);
     if (exists s) {
         items.set(1, s);
@@ -338,7 +338,7 @@ void test_Strings() {
 @noanno
 void test_Objects() {
     TypesJava java = TypesJava();
-    ObjectArray<Object> items = java.return_Objects();
+    ObjectArray<out Object> items = java.return_Objects();
     Object? o = items.get(0);
     Object o2 = items.get(0);
     if (exists o) {
